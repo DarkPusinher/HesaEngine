@@ -214,6 +214,26 @@ namespace DarkOrianna
             }
         }
 
+        private static void RKill()
+        {
+            var player = ObjectManager.Me;
+            TargetSelector.Mode = TargetSelector.TargetingMode.LessCast;
+            empt.X = 0;
+            empt.Y = 0;
+            empt.Z = 0;
+
+            var enemy = TargetSelector.GetTarget(W.Range);
+            if (enemy != null)
+            {
+
+                if (!enemy.IsDead && enemy.IsValidTarget(R.Range) && R.IsReady() && killstealMenu.GetCheckbox("useR")
+                    && enemy.Health <= R.GetDamage(enemy) && EnemiesInRange(380, BallPosition[BallPosition.Count - 1]) >= 1)
+                {
+                    R.CastOnUnit(player);
+                }
+            }
+        }
+
         private static void KS()
         {
             var player = ObjectManager.Me;
@@ -278,8 +298,8 @@ namespace DarkOrianna
         private static void autoEShield()
         {
             var player = ObjectManager.Player;
-
-            if(player.Health <= miscMenu.GetSlider("AE") && !Q.IsReady() && E.IsReady())
+        
+            if(player.Health <= miscMenu.GetSlider("EA") && !Q.IsReady() && E.IsReady())
             {
                 E.CastOnUnit(player);
             }
@@ -321,6 +341,7 @@ namespace DarkOrianna
             var mana = ObjectManager.Me.ManaPercent;
             GetBall();
             KS();
+            RKill();
 
             autoEShield();
 

@@ -20,4 +20,3 @@ C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\bin\Release\DarkOrianna.dll
 C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\bin\Release\DarkOrianna.pdb
 C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\obj\Release\DarkOrianna.dll
 C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\obj\Release\DarkOrianna.pdb
-C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\obj\Release\DarkOrianna.csprojResolveAssemblyReference.cache
