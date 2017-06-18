@@ -18,7 +18,7 @@ namespace DarkOrianna
             R = new Spell(SpellSlot.R, 1305);   //Targeted: Veigar's R
             
 
-            Q.SetSkillshot(delay: 0.0001f, width: 145, speed: 900, collision: true, type: SkillshotType.SkillshotLine);
+            Q.SetSkillshot(delay: 0.00001f, width: 145, speed: 900, collision: true, type: SkillshotType.SkillshotLine);
 
             //Do the same with QPred, EPred, RPred, always depending on what they are going to collide.
             //Examples: 

@@ -297,7 +297,7 @@ namespace DarkOrianna
                 {
 
                     Vector3 direction = (eposC[eposC.Count - 1] - eposC[eposC.Count - 2]).Normalized();
-                    Vector3 EFuture = enemy.Position + (direction * (ES / 1000) * (spell.Delay + Game.Ping));
+                    Vector3 EFuture = enemy.Position + (direction * (ES / 1000) * ((spell.Delay*1000) + Game.Ping));
                     Vector3 fut = EFuture.Extend(enemy.Position, (spell.Width - 30));
                     return fut;
                 }
