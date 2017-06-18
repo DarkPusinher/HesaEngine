@@ -1,0 +1,27 @@
+C:\Users\Ates\Documents\Visual Studio 2015\Projects\DarkOrianna\DarkOrianna\bin\Release\DarkOrianna.dll
+C:\Users\Ates\Documents\Visual Studio 2015\Projects\DarkOrianna\DarkOrianna\bin\Release\DarkOrianna.pdb
+C:\Users\Ates\Documents\Visual Studio 2015\Projects\DarkOrianna\DarkOrianna\bin\Release\HesaEngine.Core.dll
+C:\Users\Ates\Documents\Visual Studio 2015\Projects\DarkOrianna\DarkOrianna\bin\Release\HesaEngine.Sandbox.dll
+C:\Users\Ates\Documents\Visual Studio 2015\Projects\DarkOrianna\DarkOrianna\bin\Release\HesaEngine.Wrapper.dll
+C:\Users\Ates\Documents\Visual Studio 2015\Projects\DarkOrianna\DarkOrianna\bin\Release\Runtime.dll
+C:\Users\Ates\Documents\Visual Studio 2015\Projects\DarkOrianna\DarkOrianna\bin\Release\SharpDX.D3DCompiler.dll
+C:\Users\Ates\Documents\Visual Studio 2015\Projects\DarkOrianna\DarkOrianna\bin\Release\SharpDX.Direct3D9.dll
+C:\Users\Ates\Documents\Visual Studio 2015\Projects\DarkOrianna\DarkOrianna\bin\Release\SharpDX.DirectInput.dll
+C:\Users\Ates\Documents\Visual Studio 2015\Projects\DarkOrianna\DarkOrianna\bin\Release\SharpDX.dll
+C:\Users\Ates\Documents\Visual Studio 2015\Projects\DarkOrianna\DarkOrianna\bin\Release\Starter.dll
+C:\Users\Ates\Documents\Visual Studio 2015\Projects\DarkOrianna\DarkOrianna\bin\Release\SharpDX.xml
+C:\Users\Ates\Documents\Visual Studio 2015\Projects\DarkOrianna\DarkOrianna\bin\Release\SharpDX.D3DCompiler.xml
+C:\Users\Ates\Documents\Visual Studio 2015\Projects\DarkOrianna\DarkOrianna\bin\Release\SharpDX.Direct3D9.xml
+C:\Users\Ates\Documents\Visual Studio 2015\Projects\DarkOrianna\DarkOrianna\bin\Release\SharpDX.DirectInput.xml
+C:\Users\Ates\Documents\Visual Studio 2015\Projects\DarkOrianna\DarkOrianna\obj\Release\DarkOrianna.csprojResolveAssemblyReference.cache
+C:\Users\Ates\Documents\Visual Studio 2015\Projects\DarkOrianna\DarkOrianna\obj\Release\DarkOrianna.dll
+C:\Users\Ates\Documents\Visual Studio 2015\Projects\DarkOrianna\DarkOrianna\obj\Release\DarkOrianna.pdb
+C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\bin\Release\DarkOrianna.dll
+C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\bin\Release\DarkOrianna.pdb
+C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\bin\Release\SharpDX.xml
+C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\bin\Release\SharpDX.D3DCompiler.xml
+C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\bin\Release\SharpDX.Direct3D9.xml
+C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\bin\Release\SharpDX.DirectInput.xml
+C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\obj\Release\DarkOrianna.csprojResolveAssemblyReference.cache
+C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\obj\Release\DarkOrianna.dll
+C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\obj\Release\DarkOrianna.pdb
