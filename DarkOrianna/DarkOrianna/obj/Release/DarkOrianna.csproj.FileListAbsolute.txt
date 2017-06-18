@@ -18,10 +18,5 @@ C:\Users\Ates\Documents\Visual Studio 2015\Projects\DarkOrianna\DarkOrianna\obj\
 C:\Users\Ates\Documents\Visual Studio 2015\Projects\DarkOrianna\DarkOrianna\obj\Release\DarkOrianna.pdb
 C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\bin\Release\DarkOrianna.dll
 C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\bin\Release\DarkOrianna.pdb
-C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\bin\Release\SharpDX.xml
-C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\bin\Release\SharpDX.D3DCompiler.xml
-C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\bin\Release\SharpDX.Direct3D9.xml
-C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\bin\Release\SharpDX.DirectInput.xml
-C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\obj\Release\DarkOrianna.csprojResolveAssemblyReference.cache
 C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\obj\Release\DarkOrianna.dll
 C:\Users\Ates\Desktop\DarkOrianna\DarkOrianna\obj\Release\DarkOrianna.pdb

@@ -18,11 +18,11 @@ namespace DarkOrianna
         {
             if (!drawingMenu.GetCheckbox("enable")) return;
 
-            //var enemy = TargetSelector.GetTarget(Q.Range + 1000, TargetSelector.DamageType.Magical);
-            //if (enemy != null)
-            //{
-            //    Drawing.DrawCircle(CirclerPrediction(Q, enemy), 50, Color.Pink);
-            //}
+            var enemy = TargetSelector.GetTarget(Q.Range + 1000, TargetSelector.DamageType.Magical);
+            if (enemy != null)
+            {
+                Drawing.DrawCircle(LinearPrediction(Orianna.BallPosition[Orianna.BallPosition.Count - 1], Q, enemy), 50, Color.Pink);
+            }
 
             //empt.X = 0;
             //empt.Y = 0;
