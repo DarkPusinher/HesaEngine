@@ -160,8 +160,8 @@ namespace DarkOrianna
         private static void autoW()
         {
             var player = ObjectManager.Me;
-            var enemy = ObjectManager.Heroes.Enemies.FirstOrDefault(enemies => BallPosition[BallPosition.Count - 1].Distance(enemies.Position) <= 140);
-            if(enemy != null && !enemy.IsDead && enemy.IsValidTarget(W.Range) && W.IsReady())
+
+            if(EnemiesInRange(140, BallPosition[BallPosition.Count - 1]) >= 1)
             {
                 W.CastOnUnit(player);
             }
@@ -214,6 +214,57 @@ namespace DarkOrianna
             }
         }
 
+        private static void KS()
+        {
+            var player = ObjectManager.Me;
+            TargetSelector.Mode = TargetSelector.TargetingMode.LessCast;
+            empt.X = 0;
+            empt.Y = 0;
+            empt.Z = 0;
+
+            var enemy = TargetSelector.GetTarget(W.Range);
+            if (enemy != null)
+            {
+                if (!enemy.IsDead && enemy.IsValidTarget(Q.Range) && Q.IsReady() && R.IsReady())
+                {
+                    if (BestCastPosition(Q, comboMenu.GetSlider("UseQX"), 380) != empt)
+                    {
+                        Q.Cast(BestCastPosition(Q, comboMenu.GetSlider("UseQX"), 380));
+                    }
+                }
+                if (!enemy.IsDead && enemy.IsValidTarget(Q.Range) && Q.IsReady() && W.IsReady() && R.IsReady() && killstealMenu.GetCheckbox("useR") && killstealMenu.GetCheckbox("useQ") && killstealMenu.GetCheckbox("useW")
+                    && enemy.Health <= Q.GetDamage(enemy) + W.GetDamage(enemy) + R.GetDamage(enemy) + player.GetAutoAttackDamage(enemy))
+                {
+                    var location = LinearPrediction(BallPosition[BallPosition.Count - 1], Q, enemy);
+                    if (location != empt && player.Distance(location) <= Q.Range)
+                    {
+                        checkerE();
+                        Q.Cast(location);
+                    }
+                }
+                if (!enemy.IsDead && enemy.IsValidTarget(Q.Range) && Q.IsReady() && W.IsReady() && !R.IsReady() && killstealMenu.GetCheckbox("useW") && killstealMenu.GetCheckbox("useQ")
+                    && enemy.Health <= Q.GetDamage(enemy) + W.GetDamage(enemy) + player.GetAutoAttackDamage(enemy))
+                {
+                    var location = LinearPrediction(BallPosition[BallPosition.Count - 1], Q, enemy);
+                    if (location != empt && player.Distance(location) <= Q.Range)
+                    {
+                        checkerE();
+                        Q.Cast(location);
+                    }
+                }
+                if (!enemy.IsDead && enemy.IsValidTarget(Q.Range) && Q.IsReady() && !W.IsReady() && !R.IsReady() && killstealMenu.GetCheckbox("useQ")
+                    && enemy.Health <= Q.GetDamage(enemy) + player.GetAutoAttackDamage(enemy))
+                {
+                    var location = LinearPrediction(BallPosition[BallPosition.Count - 1], Q, enemy);
+                    if (location != empt && player.Distance(location) <= Q.Range)
+                    {
+                        checkerE();
+                        Q.Cast(location);
+                    }
+                }
+            }
+        }
+
         private static void autoR()
         {
             var player = ObjectManager.Me;
@@ -221,6 +272,16 @@ namespace DarkOrianna
             if (EnemiesInRange(380, BallPosition[BallPosition.Count - 1]) >= comboMenu.GetSlider("UseRX") && R.IsReady())
             {
                 R.CastOnUnit(player);
+            }
+        }
+
+        private static void autoEShield()
+        {
+            var player = ObjectManager.Player;
+
+            if(player.Health <= miscMenu.GetSlider("AE") && !Q.IsReady() && E.IsReady())
+            {
+                E.CastOnUnit(player);
             }
         }
 
@@ -259,6 +320,15 @@ namespace DarkOrianna
         {
             var mana = ObjectManager.Me.ManaPercent;
             GetBall();
+            KS();
+
+            autoEShield();
+
+            if (miscMenu.GetCheckbox("AW"))
+            {
+                autoW();
+            }
+
             if(miscMenu.GetCheckbox("RX"))
             {
                 autoR();

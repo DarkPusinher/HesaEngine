@@ -60,11 +60,10 @@ namespace DarkOrianna
             drawingMenu.Add(new MenuCheckbox("drawE", "Draw E", true));
             //drawingMenu.Add(new MenuCheckbox("drawR", "Draw R", true));
 
-            //killstealMenu = Home.AddSubMenu(prefix + "KillSteal");
-            //killstealMenu.Add(new MenuCheckbox("enable", "Enable", true));
-            //killstealMenu.Add(new MenuCheckbox("useQ", "Use Q", true));
-            //killstealMenu.Add(new MenuCheckbox("useW", "Use W", true));
-            //killstealMenu.Add(new MenuCheckbox("useE", "Use E", true));
+            killstealMenu = Home.AddSubMenu(prefix + "KillSteal");
+            killstealMenu.Add(new MenuCheckbox("useQ", "Use Q to KS", true));
+            killstealMenu.Add(new MenuCheckbox("useW", "Use W to KS", true));
+            killstealMenu.Add(new MenuCheckbox("useR", "Use R to KS", true));
             //killstealMenu.Add(new MenuCheckbox("useR", "Use R", true));
             //killstealMenu.Add(new MenuSlider("mana", "Mana % must be >= ", 10, 100, 10));
 
@@ -72,8 +71,8 @@ namespace DarkOrianna
             miscMenu = Home.AddSubMenu(prefix + "Misc");
             miscMenu.Add(new MenuCheckbox("RC", "CancelR if no hit", true));
             miscMenu.Add(new MenuCheckbox("RX", "Auto R if >= ", true));
-            //miscMenu.Add(new MenuCheckbox("agE", "AntiGapclose E", true));
-            //miscMenu.Add(new MenuCheckbox("agR", "AntiGapclose R", true));
+            miscMenu.Add(new MenuCheckbox("AW", "Auto W", true));
+            miscMenu.Add(new MenuSlider("EA", "E after Q if hp <=", 1, 5000, 250));
             //miscMenu.Add(new MenuSlider("mana", "Mana % must be >= ", 10, 100, 30));
             //miscMenu.Add(new MenuCheckbox("level", "Enable Spell Leveler", true));
             //miscMenu.Add(new MenuSlider("levelDelay", "Level UP Delay", 10, 1000, 200));
