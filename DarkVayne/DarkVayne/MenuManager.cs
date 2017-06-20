@@ -55,6 +55,7 @@ namespace DarkVayne
             //miscMenu.Add(new MenuCheckbox("agE", "AntiGapclose E", true));
             miscMenu.Add(new MenuCheckbox("IE", "Interrupt E", true));
             miscMenu.Add(new MenuKeybind("Changer", "Q Mode Changer"));
+            //miscMenu.Add(new MenuCheckbox("LockW","Focus on W", true));
 
 
         }

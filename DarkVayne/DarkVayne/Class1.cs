@@ -15,6 +15,7 @@ using static HesaEngine.SDK.NavMesh;
 using static HesaEngine.SDK.Orbwalker;
 using System.Runtime.InteropServices;
 using SharpDX.DirectInput;
+using HesaEngine.SDK.Args;
 
 namespace DarkVayne
 {
@@ -36,6 +37,8 @@ namespace DarkVayne
         static extern short GetAsyncKeyState(SharpDX.DirectInput.Key vKey);
 
         public static double timer = 0;
+
+        public static List<AttackableUnit> WEnemy = new List<AttackableUnit>();
 
         public static int ComboMode = 1;
 
@@ -68,6 +71,9 @@ namespace DarkVayne
             Game.OnTick += Game_OnTick;
             Game.OnUpdate += Game_OnUpdate;
             Orbwalker.AfterAttack += Orbwalker_AfterAttack;
+            //Obj_AI_Base.OnBuffGained += OnBuff;
+            Interrupter.OnInterruptableTarget += Interrupt;
+            
             Chat.Print("<font color='#ffffff'>"+ Name + "</font> <font color='#f8a101'>by"+ Author + "</font><font color='#f8a101'> - Loaded</font>");
         }
 
@@ -79,72 +85,72 @@ namespace DarkVayne
         public static bool LineEquations(AIHeroClient enemy, Vector3 playerPosi, AIHeroClient player, float distance) // push distance from enemy
         {
             bool wall = false;
+            //
+            //for (int i = 1; i < distance - 1; i++)
+            //{
+            //    Vector3 ect = enemy.Position.Extend(playerPosi, -1*i);
+            //    
+            //    if (ect.IsWall() == true)
+            //    {
+            //        wall = true;
+            //        break;
+            //    }
+            //}
 
-            for (int i = 1; i < distance - 1; i++)
+            Vector3 epos = enemy.Position;
+            Vector3 ppos = playerPosi;
+            Vector2 epo = (epos).To2D();
+            Vector2 ppo = (ppos).To2D();
+            
+            float x1 = ppo.X;
+            float y1 = ppo.Y;
+            float x2 = epo.X;
+            float y2 = epo.Y;
+            
+            float m = (y2 - y1) / (x2 - x1);
+            float c = y1 - m * x1;
+            Vector3 pos = enemy.Position.Extend(playerPosi, -distance);
+            Vector2 checkPos;
+            
+            if (pos.X > x2)
             {
-                Vector3 ect = enemy.Position.Extend(playerPosi, -1*i);
-                
-                if (ect.IsWall() == true)
+                for (float i = x2; i <= pos.X; i++)
                 {
-                    wall = true;
-                    break;
+                    y2 = m * i + c;
+                    checkPos.X = i;
+                    checkPos.Y = y2;
+                    Vector3 check = (checkPos).To3D();
+            
+                    if (check.IsWall())
+                    {
+                        wall = true;
+                        break;
+                    }
+                    else
+                    {
+                        wall = false;
+                    }
                 }
             }
-
-            //Vector3 epos = enemy.Position;
-            //Vector3 ppos = playerPosi;
-            //Vector2 epo = (epos).To2D();
-            //Vector2 ppo = (ppos).To2D();
-            //
-            //float x1 = ppo.X;
-            //float y1 = ppo.Y;
-            //float x2 = epo.X;
-            //float y2 = epo.Y;
-            //
-            //float m = (y2 - y1) / (x2 - x1);
-            //float c = y1 - m * x1;
-            //Vector3 pos = enemy.Position.Extend(playerPosi, -distance);
-            //Vector2 checkPos;
-            //
-            //if (pos.X > x2)
-            //{
-            //    for (float i = x2; i <= pos.X; i++)
-            //    {
-            //        y2 = m * i + c;
-            //        checkPos.X = i;
-            //        checkPos.Y = y2;
-            //        Vector3 check = (checkPos).To3D();
-            //
-            //        if (check.IsWall())
-            //        {
-            //            wall = true;
-            //            break;
-            //        }
-            //        else
-            //        {
-            //            wall = false;
-            //        }
-            //    }
-            //}
-            //if (pos.X < x2)
-            //{
-            //    for (float i = x2; i >= pos.X; i--)
-            //    {
-            //        y2 = m * i + c;
-            //        checkPos.X = i;
-            //        checkPos.Y = y2;
-            //        Vector3 check = (checkPos).To3D();
-            //        if (check.IsWall())
-            //        {
-            //            wall = true;
-            //            break;
-            //        }
-            //        else
-            //        {
-            //            wall = false;
-            //        }
-            //    }
-            //}
+            if (pos.X < x2)
+            {
+                for (float i = x2; i >= pos.X; i--)
+                {
+                    y2 = m * i + c;
+                    checkPos.X = i;
+                    checkPos.Y = y2;
+                    Vector3 check = (checkPos).To3D();
+                    if (check.IsWall())
+                    {
+                        wall = true;
+                        break;
+                    }
+                    else
+                    {
+                        wall = false;
+                    }
+                }
+            }
             return wall;
         }
 
@@ -286,7 +292,7 @@ namespace DarkVayne
 
                             postQ1 = enemys.Position.To2D().RotateAroundPoint(player.Position.To2D(), i);
                             posQ1 = player.Position.To2D().Extend(postQ1, Q.Range);
-                            if (/*LineEquations(enemys, posQ1.To3D(), player, 425) == true   || */ buildingChecks(enemys, posQ1.To3D(), player, 425) == true)
+                            if (LineEquations(enemys, posQ1.To3D(), player, 425) == true   ||  buildingChecks(enemys, posQ1.To3D(), player, 425) == true)
                             {
 
                                 stun.Add(posQ1.To3D());
@@ -295,8 +301,10 @@ namespace DarkVayne
                         }
                         if (stun.Count != 0)
                         {
+                            
                             double cnt = (stun.Count / 2) - 1;
                             int cvrt = Convert.ToInt32(Math.Ceiling(cnt));
+                            
                             return stun[cvrt];
                         }
                     }
@@ -364,7 +372,7 @@ namespace DarkVayne
 
                             postQ1 = enemys.Position.To2D().RotateAroundPoint(player.Position.To2D(), i);
                             posQ1 = player.Position.To2D().Extend(postQ1, Q.Range);
-                            if (/*LineEquations(enemys, posQ1.To3D(), player, 425) == true   || */ buildingChecks(enemys, posQ1.To3D(), player, 425) == true)
+                            if (LineEquations(enemys, posQ1.To3D(), player, 425) == true   ||  buildingChecks(enemys, posQ1.To3D(), player, 425) == true)
                             {
 
                                 stun.Add(posQ1.To3D());
@@ -442,7 +450,7 @@ namespace DarkVayne
 
                             postQ1 = enemys.Position.To2D().RotateAroundPoint(player.Position.To2D(), i);
                             posQ1 = player.Position.To2D().Extend(postQ1, Q.Range);
-                            if (/*LineEquations(enemys, posQ1.To3D(), player, 425) == true   || */ buildingChecks(enemys, posQ1.To3D(), player, 425) == true)
+                            if (LineEquations(enemys, posQ1.To3D(), player, 425) == true   ||  buildingChecks(enemys, posQ1.To3D(), player, 425) == true)
                             {
 
                                 stun.Add(posQ1.To3D());
@@ -491,6 +499,26 @@ namespace DarkVayne
             return ComboMode;
         }
 
+        //public static void LockW()
+        //{
+        //    var player = ObjectManager.Me;
+        //
+        //    var enemies = ObjectManager.Heroes.Enemies;
+        //    foreach (var enemy in enemies)
+        //    {
+        //        if (enemy != null && !enemy.IsDead && enemy.IsValidTarget() && WStacked != null)
+        //        {
+        //            if (enemy.IsValidTarget(player.AttackRange) && enemy.HasBuff("VayneSilveredDebuff")
+        //                && WStacked.Position.Distance(enemy.Position) < 50)
+        //            {
+        //                TargetSelector.SetTarget(enemy);
+        //            }
+        //        }
+        //        else
+        //            Mode = TargetingMode.LessAttack;
+        //    }
+        //}
+
         public static void ELogic()
         {
             var player = ObjectManager.Me;
@@ -500,7 +528,7 @@ namespace DarkVayne
             {
                 if(enemy != null && enemy.IsValidTarget(E.Range) && !enemy.IsDead)
                 {
-                    if (buildingChecks(enemy, player.Position, player, 425) == true)
+                    if (buildingChecks(enemy, player.Position, player, 425) == true || LineEquations(enemy, player.Position, player, 425))
                     {
                         E.CastOnUnit(enemy);
                         break;
@@ -511,6 +539,11 @@ namespace DarkVayne
 
         private static void Orbwalker_AfterAttack(AttackableUnit Source, AttackableUnit target)
         {
+            if(Source == ObjectManager.Me && W.IsLearned)
+            {  
+                WEnemy.Add(target);
+            }
+
             if (Core.Orbwalker.ActiveMode == OrbwalkingMode.Combo && comboMenu.GetCheckbox("ComboQ") || Core.Orbwalker.ActiveMode == OrbwalkingMode.Harass && harassMenu.GetCheckbox("HarassQ"))
             {
                 
@@ -536,16 +569,6 @@ namespace DarkVayne
             }
         }
 
-        private static void Interrupt()
-        {
-            var enemy = ObjectManager.Heroes.Enemies.Where(enemies => enemies != null && enemies.IsValidTarget(ObjectManager.Me.AttackRange)
-           && enemies.IsCastingInterruptableSpell(true)).MinOrDefault(enemies => ObjectManager.Me.Position.Distance(enemies.Position));
-
-            if(enemy != null && miscMenu.GetCheckbox("IE") && E.IsReady())
-            {
-                E.CastOnUnit(enemy);
-            }
-        }
 
         //private static void LaneClear()
         //{
@@ -605,9 +628,14 @@ namespace DarkVayne
 
         private void Game_OnUpdate()
         {
-            KS();
+            KS(); 
 
             ChangePriority();
+
+            if(miscMenu.GetCheckbox("LockW"))
+            {
+                //LockW();
+            }
 
             if (Core.Orbwalker.ActiveMode == Orbwalker.OrbwalkingMode.Combo && comboMenu.GetCheckbox("ComboE"))
             {
@@ -648,6 +676,18 @@ namespace DarkVayne
                 {
                     R.CastOnUnit(ObjectManager.Me);
                 }
+            }
+        }
+        
+        private static void Interrupt(AIHeroClient Source, Interrupter.InterruptableTargetEventArgs args)
+        {
+            if (!Source.IsEnemy || args.DangerLevel < Interrupter.DangerLevel.Medium)
+                return;
+
+            if (Source != null && Source.IsValidTarget(E.Range)
+                && miscMenu.GetCheckbox("IE") && E.IsReady())
+            {
+                E.CastOnUnit(Source);
             }
         }
    }
