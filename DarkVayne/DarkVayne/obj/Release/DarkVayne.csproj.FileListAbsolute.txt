@@ -18,10 +18,6 @@ C:\Users\Ates\Documents\Visual Studio 2015\Projects\DarkVayne\DarkVayne\bin\Rele
 C:\Users\Ates\Documents\Visual Studio 2015\Projects\DarkVayne\DarkVayne\bin\Release\SharpDX.D3DCompiler.xml
 C:\Users\Ates\Desktop\DarkVayne\DarkVayne\bin\Release\DarkVayne.dll
 C:\Users\Ates\Desktop\DarkVayne\DarkVayne\bin\Release\DarkVayne.pdb
-C:\Users\Ates\Desktop\DarkVayne\DarkVayne\bin\Release\SharpDX.xml
-C:\Users\Ates\Desktop\DarkVayne\DarkVayne\bin\Release\SharpDX.D3DCompiler.xml
-C:\Users\Ates\Desktop\DarkVayne\DarkVayne\bin\Release\SharpDX.Direct3D9.xml
-C:\Users\Ates\Desktop\DarkVayne\DarkVayne\bin\Release\SharpDX.DirectInput.xml
 C:\Users\Ates\Desktop\DarkVayne\DarkVayne\obj\Release\DarkVayne.csprojResolveAssemblyReference.cache
 C:\Users\Ates\Desktop\DarkVayne\DarkVayne\obj\Release\DarkVayne.dll
 C:\Users\Ates\Desktop\DarkVayne\DarkVayne\obj\Release\DarkVayne.pdb

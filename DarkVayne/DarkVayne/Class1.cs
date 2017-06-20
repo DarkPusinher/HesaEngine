@@ -68,7 +68,6 @@ namespace DarkVayne
 
             LoadDrawings();
 
-            Game.OnTick += Game_OnTick;
             Game.OnUpdate += Game_OnUpdate;
             Orbwalker.AfterAttack += Orbwalker_AfterAttack;
             //Obj_AI_Base.OnBuffGained += OnBuff;
@@ -539,18 +538,9 @@ namespace DarkVayne
 
         private static void Orbwalker_AfterAttack(AttackableUnit Source, AttackableUnit target)
         {
-            if(Source == ObjectManager.Me && W.IsLearned)
-            {  
-                WEnemy.Add(target);
-            }
 
             if (Core.Orbwalker.ActiveMode == OrbwalkingMode.Combo && comboMenu.GetCheckbox("ComboQ") || Core.Orbwalker.ActiveMode == OrbwalkingMode.Harass && harassMenu.GetCheckbox("HarassQ"))
             {
-                
-                if (Source != ObjectManager.Player)
-                {
-                    return;
-                }
                 if (Source == ObjectManager.Player)
                 {
                     if (true)
@@ -568,7 +558,6 @@ namespace DarkVayne
                 }
             }
         }
-
 
         //private static void LaneClear()
         //{
@@ -595,47 +584,13 @@ namespace DarkVayne
                 Q.CastOnUnit(enemy);
             }
         }
-
-        private void Game_OnTick()
-        {
-            var mana = ObjectManager.Me.ManaPercent;
-
-            if (killstealMenu.GetCheckbox("enable"))
-                // Killsteal.DoKS();
-
-            
-               // Combo.DoCombo();
-               
-
-            if (orb.ActiveMode == Orbwalker.OrbwalkingMode.Harass)
-            {
-                //Not Implemented Yet
-               // Harass.DoHarass();
-            }
-
-            if (orb.ActiveMode == Orbwalker.OrbwalkingMode.LaneClear)
-               // LaneClear.DoLaneClear();
-
-            if (orb.ActiveMode == Orbwalker.OrbwalkingMode.LastHit)
-                //LaneClear.DoLaneClear();
-
-            if (orb.ActiveMode == Orbwalker.OrbwalkingMode.Flee)
-            {
-                //Not Implemented Yet
-               // Flee.DoFlee();
-            }
-        }
-
+                                                             
         private void Game_OnUpdate()
         {
             KS(); 
 
             ChangePriority();
 
-            if(miscMenu.GetCheckbox("LockW"))
-            {
-                //LockW();
-            }
 
             if (Core.Orbwalker.ActiveMode == Orbwalker.OrbwalkingMode.Combo && comboMenu.GetCheckbox("ComboE"))
             {
